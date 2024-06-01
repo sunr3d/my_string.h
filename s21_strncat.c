@@ -1,4 +1,4 @@
-#include "s21_strings.h"
+#include "s21_string.h"
 
 // Конкатенация n байт из src к dest 
 char* s21_strncat(char *dest, const char *src, s21_size_t n) {

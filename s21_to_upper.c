@@ -1,4 +1,4 @@
-#include "s21_strings.h"
+#include "s21_string.h"
 
 // Все буквы строки в апперкейс
 void* s21_to_upper(const char *str) {

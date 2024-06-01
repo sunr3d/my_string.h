@@ -1,11 +1,26 @@
-#include "s21_strings.h"
+#include "s21_string.h"
 
 char* s21_strtok(char *str, const char *delim) {
-  static char* last_address;
-  char* token = s21_NULL;
-  int token_found = 0;
-  if(!str)
-    str = last_address;
+  static char* last_pos; // Переменная для хранения последней позиции в строке перед последним разделителем
+  char* token = s21_NULL; // Инициализация указателя на токен
+  if(str == s21_NULL && last_pos != s21_NULL) // Если str равен NULL, продолжаем с предыдущей позиции в строке
+    str = last_pos;
+
+  if(str != s21_NULL) {
+    // Цикл пропускает все символы из delim до первого символа, который не является разделителем
+    while(*str && s21_strchr(delim, *str)) { // Пока текущий символ не является разделителем и не является терминатором строки
+      str++; // Переход к следующему символу
+    }
+
+    token = str; // Указываем начало токена
+    str = s21_strpbrk(token, delim); // Поиск следующего разделителя в строке
+    if(str == s21_NULL) // Если не найден следующий разделитель
+      last_pos = s21_strchr(token, '\0'); 
+    else {
+      *str = '\0'; // Заменяем его на терминатор строки
+      last_pos = str + 1; // Обновляем последнюю позицию в строке
+    }
+  }
 
   return token;
 }

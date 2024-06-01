@@ -1,4 +1,4 @@
-#include "s21_strings.h"
+#include "s21_string.h"
 
 // Все буквы строки в ловеркейс
 void* s21_to_lower(const char *str) {
