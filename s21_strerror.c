@@ -2,7 +2,7 @@
 
 #if defined(__APPLE__)
 #define N_ERROR 107
-#define UERROR "Unknown error: "
+#define UN_ERROR "Unknown error: "
 
 static const char* error_array[] = {
     "Undefined error: 0",
@@ -115,7 +115,7 @@ static const char* error_array[] = {
 
 #elif defined(__linux__)
 #define N_ERROR 134
-#define UERROR "Unknown error "
+#define UN_ERROR "Unknown error "
 
 static const char* error_array[] = {
     "Success",
@@ -256,11 +256,11 @@ static const char* error_array[] = {
 
 char* s21_strerror(int errnum) {
   static char unknown_error[256];
-  const char* error_message = s21_NULL;
+  char* error_message = s21_NULL;
   if (errnum >= 0 && errnum < N_ERROR)
-    error_message = error_array[errnum];
+    error_message = (char*)error_array[errnum];
   else {
-    s21_sprintf(unknown_error, "%s%d", UERROR, errnum);
+    s21_sprintf(unknown_error, "%s%d", UN_ERROR, errnum);
     error_message = unknown_error;
   }
   return error_message;
